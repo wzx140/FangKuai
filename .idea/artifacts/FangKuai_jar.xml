@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="FangKuai:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FangKuai_jar</output-path>
+    <root id="root">
+      <element id="archive" name="FangKuai.jar">
+        <element id="module-output" name="FangKuai" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="file-copy" path="$PROJECT_DIR$/../document/jar/Junit/hamcrest-core-1.3.jar" />
+        <element id="file-copy" path="$PROJECT_DIR$/../document/jar/Junit/junit-4.11.jar" />
+        <element id="file-copy" path="$PROJECT_DIR$/../document/jar/javamail-1.4.7/mail.jar" />
+      </element>
+    </root>
+  </artifact>
+</component>
