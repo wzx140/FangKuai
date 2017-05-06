@@ -17,16 +17,43 @@ import java.util.Timer;
  * 一个棋盘类
  */
 public class GamePanel extends MainFrame {
-    private HashMap<Point, Integer> gamePanel;  //棋盘数据
+    /**
+     * 棋盘数据
+     */
+    private HashMap<Point, Integer> gamePanel;
     private Block block;
     private Shap shap;
-    private int row;  //棋盘行数
-    private int column;  //棋盘列数
-    private Cell[] temp;  //cell的一个暂时缓存
-    private boolean over;  //游戏结束标志
-    private boolean suspend; //游戏暂停标志
-    private float suspendTime; //暂停的时间
+    /**
+     * 棋盘行数
+     */
+    private int row;
+    /**
+     * 棋盘列数
+     */
+    private int column;
+    /**
+     * cell的一个暂时缓存
+     */
+    private Cell[] temp;
+    /**
+     * 游戏结束标志
+     */
+    private boolean over;
+    /**
+     * 游戏暂停标志
+     */
+    private boolean suspend;
+    /**
+     * 暂停的时间
+     */
+    private float suspendTime;
     //    private boolean over;
+
+    /**
+     * 初始化棋盘
+     * @param row 游戏棋盘的行数
+     * @param column 游戏棋盘的列数
+     */
     public GamePanel(int row, int column) {
         this.row = row;
         this.column = column;
@@ -39,7 +66,9 @@ public class GamePanel extends MainFrame {
         suspendTime=0;
     }
 
-    //初始化监听器
+    /**
+     * 初始化监听器
+     */
     private void initListenner() {
         ShapControl shapControl = ShapControl.getShapControl();
         shapControl.setGamePanel(this);
@@ -89,7 +118,10 @@ public class GamePanel extends MainFrame {
     public void setSuspendTime() {
         suspendTime+=0.5;
     }
-    //游戏结束 分数结算
+
+    /**
+     * 游戏结束 分数结算
+     */
     private void gameAccount() {
         shap=null;
         int score = block.getScore();
@@ -100,11 +132,15 @@ public class GamePanel extends MainFrame {
         textArea.append("暂停了"+suspendTime+"s");
     }
 
-    //结束画面
+    /**
+     * 结束画面
+     */
     private void printOver() {
         textArea.setText("OVER \n");
     }
-    //出现一个随机shap
+    /**
+     * 出现一个随机shap
+     */
     public void shapInit() {
         shap = new Shap(randomModel(), column);
         print();
@@ -117,7 +153,9 @@ public class GamePanel extends MainFrame {
         }
     }
 
-    //get inited blocked cells
+    /**
+     * get inited blocked cells
+     */
     private Cell[] initBlockedCells() {
         Cell[] cells = new Cell[column];
         for (int i = 0; i < column; i++) {
@@ -126,7 +164,9 @@ public class GamePanel extends MainFrame {
         return cells;
     }
 
-    //初始化一个全部为不占用的棋盘
+    /**
+     * 初始化一个全部为不占用的棋盘
+     */
     private void initGamePanel() {
         for (int i = 1; i <= row + 1; i++) {
             for (int j = 1; j <= column; j++) {
@@ -135,7 +175,9 @@ public class GamePanel extends MainFrame {
         }
     }
 
-    //打印棋盘
+    /**
+     * 打印棋盘
+     */
     public void print() {
         setData();  //更新棋盘数据
         int count = 0;
@@ -161,7 +203,10 @@ public class GamePanel extends MainFrame {
     public boolean getOver() {
         return over;
     }
-    //将blocked shap添加到block
+
+    /**
+     * 将blocked shap添加到block
+     */
     public void addBlock() {
         block.addCells(shap.getStatedCells());
     }
@@ -217,7 +262,9 @@ public class GamePanel extends MainFrame {
         }
     }
 
-    //将boolen转化为1,2
+    /**
+     * 将boolen转化为1,2
+     */
     private int state(boolean cellState) {
         if (cellState) {
             return 1;

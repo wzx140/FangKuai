@@ -12,7 +12,10 @@ public class Shap implements Cloneable {
     public final static int model3 = 2;
     private Cell[] cells;
     private ReentrantLock lock;
-    private boolean blockFlag;  //shap是否block
+    /**
+     * shap是否block
+     */
+    private boolean blockFlag;
     private int column;
     private int currentModel;
 
@@ -72,7 +75,11 @@ public class Shap implements Cloneable {
     }
 
 
-    //由按键做出回应
+    /**
+     * 由按键做出回应
+     * @param e 按键字符
+     * @throws IOException
+     */
     public void keyTyped(char e) throws IOException {
         lock.lock();
         try {
@@ -93,7 +100,9 @@ public class Shap implements Cloneable {
         }
     }
 
-    //shap下移，应用于timedown类
+    /**
+     * shap下移，应用在timedown类中调用
+     */
     public void shapDown() {
         lock.lock();
         try {
@@ -163,7 +172,10 @@ public class Shap implements Cloneable {
         }
     }
 
-    //return 最左边的cell
+    /**
+     *
+     * @return 最左边的cell
+     */
     private int getLeftCell() {
         Cell[] cells = getStatedCells();
         int y = cells[0].getY();
@@ -175,7 +187,10 @@ public class Shap implements Cloneable {
         return y;
     }
 
-    //return 最右边的cell
+    /**
+     *
+     * @return 最右边的cell
+     */
     private int getRightCell() {
         Cell[] cells = getStatedCells();
         int y = cells[0].getY();
@@ -187,7 +202,6 @@ public class Shap implements Cloneable {
         return y;
     }
 
-    //clone shap
     @Override
     public Object clone() throws CloneNotSupportedException {
         Shap shap = (Shap) super.clone();
@@ -199,14 +213,22 @@ public class Shap implements Cloneable {
         return shap;
     }
 
-    //下一按键e后，返回stated状态的cell[]，应用于shapcontrol
+    /**
+     * 下一按键e后，返回stated状态的cell[]，应用在shapcontrol中调用
+     * @param e 键盘输入的字符
+     * @return stated状态的cell[]
+     * @throws CloneNotSupportedException
+     * @throws IOException
+     */
     public Cell[] getNextStatedCells(char e) throws CloneNotSupportedException, IOException {
         Shap shap = (Shap) this.clone();
         shap.keyTyped(e);
         return shap.getStatedCells();
     }
 
-    //下一次timedown后，返回stated状态的cell[]
+    /**
+     * 下一次timedown后，返回stated状态的cell[]
+     */
     public Cell[] getDownStatedCells() throws CloneNotSupportedException, IOException {
         Shap shap = (Shap) this.clone();
         shap.keyTyped('s');
@@ -221,7 +243,9 @@ public class Shap implements Cloneable {
         return blockFlag;
     }
 
-    //返回当前时刻stated状态的cell[]
+    /**
+     * 返回当前时刻stated状态的cell[]
+     */
     public Cell[] getStatedCells() {
         Cell[] temp = new Cell[4];
         int count = 0;

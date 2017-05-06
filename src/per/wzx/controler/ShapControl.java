@@ -20,7 +20,9 @@ public class ShapControl extends KeyAdapter {
         return SHAP_CONTROL;
     }
 
-    //关联一个棋盘
+    /**
+     * 关联一个棋盘
+     */
     public void setGamePanel(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }

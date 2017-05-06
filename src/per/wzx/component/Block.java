@@ -40,12 +40,16 @@ public class Block {
         }
     }
 
-    //返回blockcell的数组
+    /**
+     * 返回blockcell的数组
+     */
     public Cell[] getCells() {
         return (Cell[]) blockCell.toArray(new Cell[blockCell.size()]);
     }
 
-    //return lastest four cells
+    /**
+     * return lastest four cells
+     */
     public Cell[] getLastCells() {
         Cell[] cells = new Cell[4];
         for (int i = 0; i < 4; i++) {
@@ -54,7 +58,11 @@ public class Block {
         return cells;
     }
 
-    //判断given cells是否与blockcell重合，此处应give 将来的cells
+    /**
+     * 判断cells是否与blockcell重合
+     * @param cells 将来的cells
+     * @return
+     */
     public boolean isBlocked(Cell[] cells) {
         for (Cell block : blockCell) {
             for (Cell cell : cells) {
@@ -66,7 +74,9 @@ public class Block {
         return false;
     }
 
-    //消除堆满的行
+    /**
+     * 消除堆满的行
+     */
     public void dropLine() {
         Map<Integer, Integer> rowState = new HashMap<>(); //储存每行有多少个stated方块
         for (Cell cell : blockCell) {
@@ -86,7 +96,9 @@ public class Block {
 
     }
 
-    //指定行删除并指定行以上下移一格
+    /**
+     * 指定行删除并指定行以上下移一格
+     */
     private void downLines(int row) {
         Iterator<Cell> cellIter = blockCell.iterator();
         while (cellIter.hasNext()) {
